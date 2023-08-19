@@ -47,3 +47,4 @@ assets/
 **/*/*.spec*
 tsconfig.spec.json
 .editorconfig
+.vscode
