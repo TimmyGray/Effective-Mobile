@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/app.component.css';
+
+.ml-2r{
+
+    margin-left:2rem;
+
+}
+
+.mr-2r{
+
+    margin-right:2rem;
+
+}
