@@ -1,0 +1,12 @@
+.posts-table-post{
+
+    max-width:400px;
+   
+}
+
+
+    .posts-table-post:hover {
+        transition-property: background-color;
+        transition-duration: 0.2s;
+        background-color: #c5a8e6;
+    }

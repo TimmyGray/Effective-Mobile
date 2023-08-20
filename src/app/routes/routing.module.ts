@@ -8,7 +8,7 @@ import { PostsComponent } from '../posts/posts.component';
 const routes: Routes = [
 
   { path: 'authorize', component: AuthorizeComponent },
-  { path: 'post', component: PostComponent },
+  { path: 'post/:id', component: PostComponent },
   { path: 'posts', component: PostsComponent },
   { path: '', redirectTo: '/posts', pathMatch: 'full' },
 

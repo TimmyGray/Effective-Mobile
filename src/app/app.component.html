@@ -1,43 +1,52 @@
 <div class="app">
 
-  <div class="app-toollbar">
+  <div class="app-toolbar">
 
-    <mat-toolbar color="primary">
+      <mat-toolbar color="primary">
 
-      <button mat-icon-button><mat-icon>thumb_up</mat-icon></button>
+          <button mat-icon-button><mat-icon>thumb_up</mat-icon></button>
 
-      <span class="hide-tabs ml-2r mr-2r">Effective-Mobile</span>
+          <span class="ml-2r mr-2r">Effective-Mobile</span>
 
-      <div class="app-toolbar-menu show-menu hide-menu">
+          <div class="app-toolbar-menu show-menu hide-menu">
 
-        <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+              <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
 
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>account_circle</mat-icon>
-            <span>Authorize</span>
-          </button>
+              <mat-menu #menu="matMenu">
 
-          <button mat-menu-item>
-            <mat-icon>peaker_notes</mat-icon>
-            <span>Posts</span>
-          </button>
+                  <button mat-menu-item routerLink="/authorize">
+                      <mat-icon>account_circle</mat-icon>
+                      <span>Authorize</span>
+                  </button>
 
-        </mat-menu>
+                  <button mat-menu-item routerLink="/posts">
+                      <mat-icon>comment</mat-icon>
+                      <span>Posts</span>
+                  </button>
 
-      </div>
+              </mat-menu>
 
-      <div class="app-toolbar-tabs hide-tabs">
-        <a mat-button color="accent" routerLink="/authorize" routerLinkActive="active">Authorize</a>
-        <a mat-button color="accent" routerLink="/posts" routerLinkActive="active">Posts</a>
-      </div>
-
-    </mat-toolbar>
-
-    <div>
+          </div>
 
 
-    </div>
+          <div class="app-toolbar-tabs hide-tabs">
+              <a mat-button color="accent" routerLink="/authorize" routerLinkActive="active">Authorize</a>
+              <a mat-button color="accent" routerLink="/posts" routerLinkActive="active">Posts</a>
+          </div>
+
+          <div class="app-toolbar-spacer"></div>
+
+          <div class="app-toolbar-accmenu">
+
+              <button mat-mini-fab color="accent" [matMenuTriggerFor]="accmenu"><mat-icon>portrait</mat-icon></button>
+              <mat-menu #accmenu="matMenu">
+                  <button mat-menu-item>logout</button>
+              </mat-menu>
+
+          </div>
+
+      </mat-toolbar>
+
 
   </div>
 

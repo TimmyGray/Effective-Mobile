@@ -1,3 +1,22 @@
+.app{
+
+
+}
+
+.app-toolbar{
+
+    position:sticky;
+
+}
+
+.app-toolbar-accmenu {
+}
+
+.app-toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+
 @media(max-width:599px){
 
   .hide-tabs {
@@ -24,4 +43,6 @@
 .active {
   background: #3f3a8c;
 }
+
+
 

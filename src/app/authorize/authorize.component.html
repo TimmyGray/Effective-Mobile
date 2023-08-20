@@ -1,1 +1,47 @@
-<p>authorize works!</p>
+<div class="auth">
+
+    <div class="auth-header mat-headline-4">
+        <p>Authorize</p>
+    </div>
+
+    <form class="auth-form">
+
+        <div class="auth-form-login">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Enter email or login:</mat-label>
+                <input matInput type="text" placeholder="email\login..."  />
+                <mat-icon matSuffix>face</mat-icon>
+            </mat-form-field>
+
+        </div>
+
+        <div class="auth-form-password">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Enter password:</mat-label>
+                <input matInput type="password" placeholder="password..." />
+                <button mat-icon-button matSuffix><mat-icon>visibility_off</mat-icon></button>
+            </mat-form-field>
+
+        </div>
+
+        <div class="auth-form-confirm">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm your password:</mat-label>
+                <input matInput type="password" placeholder="confirm password..." />
+                <button mat-icon-button matSuffix><mat-icon>visibility_off</mat-icon></button>
+            </mat-form-field>
+
+        </div>
+
+        <div class="auth-form-buttons">
+
+            <button mat-raised-button color="primary">Login</button>
+
+        </div>
+
+    </form>
+
+</div>
