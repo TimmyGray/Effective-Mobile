@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import './app/app.component.css';
 
+:root {
+  --main-color-first: #52e389;
+  --main-color-second: #c2f2d4;
+  --main-color-third: #cfd1d0;
+  --main-color-fourth: #b574cf;
+  --main-color-fifth: #2b2a2b;
+}
+
 .ml-2r{
 
     margin-left:2rem;
@@ -14,12 +22,14 @@
 }
 
 body {
-    height: 100%;
-    background: linear-gradient(#383838, #cffff9 );
+  height: 100%;
+  background: linear-gradient(#383838, var(--main-color-fifth) );
+  background-attachment: fixed;
+  color:var(--main-color-first);
 }
 
 html{
 
-   
+   height:100%;
 
 }

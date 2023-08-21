@@ -1,12 +1,21 @@
-.posts-table-post{
+@import '../../styles.css';
 
-    max-width:400px;
-   
+.posts-table-post {
+  background: linear-gradient(#583b63,#1d5432);
+  max-width: 400px;
+  cursor:pointer;
 }
 
 
-    .posts-table-post:hover {
-        transition-property: background-color;
-        transition-duration: 0.2s;
-        background-color: #c5a8e6;
+  .posts-table-post:hover {
+    transition-property: background;
+    transition-duration: 0.5s;
+    background: #33183d;
+  }
+
+
+    .posts-table-post-content{
+
+        color:var(--main-color-second)
+
     }
