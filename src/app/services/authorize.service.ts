@@ -24,8 +24,9 @@ export class AuthorizeService {
 
   public loginUser(user: User) {
 
-    localStorage.setItem('user-login', user.login);
-    this.isAuthorized.next(true);
+      this.isAuthorized.next(true);
+      localStorage.setItem('user-login', user.login);
+
   }
 
   public logOutUser() {

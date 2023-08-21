@@ -9,7 +9,7 @@
         <mat-grid-list cols="2">
             <mat-grid-tile *ngFor="let post of posts; let i=index">
 
-                <mat-card class="posts-table-post">
+                <mat-card class="posts-table-post" [routerLink]="['/hero',post.id]">
                   <mat-card-header>
                     <mat-card-subtitle>User - {{post.userId}}</mat-card-subtitle>
                     <mat-card-subtitle>Post - {{post.id}}</mat-card-subtitle>

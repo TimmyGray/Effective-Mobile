@@ -1,6 +1,7 @@
-import { Component,OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, switchMap } from 'rxjs';
 import { Post } from '../models/post';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { PostsService } from '../services/posts.service';
 import { AuthorizeService } from '../services/authorize.service';
@@ -19,15 +20,37 @@ export class PostsComponent implements OnInit {
 
   constructor(
     private readonly postsserv: PostsService,
-    private readonly authserv: AuthorizeService
-  ){
+      private readonly authserv: AuthorizeService,
+      private readonly router: Router,
+      private readonly route: ActivatedRoute) {
 
-    this.posts = [];
-    this.authserv.isAuthorized$.subscribe({ next: (is_authorized => this.isAuthorized = is_authorized) });
+      this.posts = [];
+
+      this.authserv.isAuthorized$.subscribe({
+
+          next: (is_authorized => {
+
+              this.isAuthorized = is_authorized;
+
+              if (this.isAuthorized) {
+
+                  this.router.navigate(['/authorize']);
+
+              }
+
+          })
+
+      });
+
 
   }
 
     ngOnInit() {
+
+        this.isAuthorized = this.authserv.checkUser();
+        if (!this.isAuthorized) {
+            this.router.navigate(['/authorize']);
+        }
 
         this.postsserv.getPosts().subscribe({
 

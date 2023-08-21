@@ -4,7 +4,7 @@ import { AppRoutingModule } from './routes/routing.module';
 import { MaterialModule } from './materials/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 import { AppComponent } from './app.component';
@@ -25,7 +25,8 @@ import { AuthorizeComponent } from './authorize/authorize.component';
     MaterialModule,
     BrowserAnimationsModule,
       HttpClientModule,
-      FormsModule
+      FormsModule,
+      ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

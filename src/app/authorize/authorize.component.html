@@ -4,13 +4,13 @@
         <p>Authorize</p>
     </div>
 
-    <form class="auth-form">
+    <form  class="auth-form" [formGroup]="authorizeForm">
 
         <div class="auth-form-login">
 
             <mat-form-field appearance="outline">
                 <mat-label>Enter email or login:</mat-label>
-                <input matInput type="text" placeholder="email\login..."  />
+                <input matInput type="text" placeholder="email\login..." formControlName="login" />
                 <mat-icon matSuffix>face</mat-icon>
             </mat-form-field>
 
@@ -20,25 +20,26 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Enter password:</mat-label>
-                <input matInput type="password" placeholder="password..." />
-                <button mat-icon-button matSuffix><mat-icon>visibility_off</mat-icon></button>
+                <input matInput [type]="(userInfo.hide_password)?'password':'text'" placeholder="password..." formControlName="password" (input)="inputLoginPassword()"/>
+                <button mat-icon-button matSuffix (click)="userInfo.hide_password=!userInfo.hide_password"><mat-icon>{{(userInfo.hide_password)?'visibility_off':'visibility_on'}}</mat-icon></button>
             </mat-form-field>
 
         </div>
 
-        <div class="auth-form-confirm">
+        <div class="auth-form-confirm" *ngIf="isRegistration">
 
             <mat-form-field appearance="outline">
                 <mat-label>Confirm your password:</mat-label>
-                <input matInput type="password" placeholder="confirm password..." />
-                <button mat-icon-button matSuffix><mat-icon>visibility_off</mat-icon></button>
+                <input matInput [type]="(userInfo.hide_confirm)?'password':'text'" placeholder="confirm password..." formControlName="confirm" [required]="isRegistration"/>
+                <button mat-icon-button matSuffix (click)="userInfo.hide_confirm=!userInfo.hide_confirm"><mat-icon>{{(userInfo.hide_confirm)?'visibility_off':'visibility_on'}}</mat-icon></button>
             </mat-form-field>
 
         </div>
 
         <div class="auth-form-buttons">
 
-            <button mat-raised-button color="primary">Login</button>
+            <button mat-raised-button class="mr-1r" color="warn" (click)="isRegistration=!isRegistration">{{(!isRegistration)? 'Not registered?':'Allready registered?'}}</button>
+            <button mat-raised-button color="primary" type="button" [disabled]="!authorizeForm.valid" (click)="login()">{{(!isRegistration)?'Login':'Register'}}</button>
 
         </div>
 
