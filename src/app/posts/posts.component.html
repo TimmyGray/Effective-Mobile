@@ -1,28 +1,61 @@
 <div class="posts">
 
-    <div class="posts-header mat-headline-4">
-        <p>Posts</p>
-    </div>
+  <div class="posts-header mat-headline-4">
+    <p>Posts</p>
+  </div>
+  <div class="posts-view-buttom">
+    <button mat-fab color="primary" (click)="changeView()" [disabled]="isTableView"><mat-icon>table</mat-icon></button>
+    <button mat-fab color="accent" (click)="changeView()" [disabled]="isGridView"><mat-icon>view_module</mat-icon></button>
+  </div>
+  <div class="posts-grid" *ngIf="isGridView">
 
-    <div class="posts-table">
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let post of posts; let i=index">
 
-        <mat-grid-list cols="2">
-            <mat-grid-tile *ngFor="let post of posts; let i=index">
+        <mat-card class="posts-grid-post" (click)="selectPost(post)">
+          <mat-card-header>
+            <mat-card-subtitle>User - {{post.userId}}</mat-card-subtitle>
+            <mat-card-subtitle>Post - {{post.id}}</mat-card-subtitle>
+            <mat-card-title>{{post.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="posts-grid-post-content">
+            <p>{{post.body}}</p>
+          </mat-card-content>
+        </mat-card>
 
-                <mat-card class="posts-table-post" [routerLink]="['/posts',post.id]">
-                  <mat-card-header>
-                    <mat-card-subtitle>User - {{post.userId}}</mat-card-subtitle>
-                    <mat-card-subtitle>Post - {{post.id}}</mat-card-subtitle>
-                    <mat-card-title>{{post.title}}</mat-card-title>
-                  </mat-card-header>
-                    <mat-card-content class="posts-table-post-content">
-                        <p>{{post.body}}</p>
-                    </mat-card-content>
-                </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
 
-            </mat-grid-tile>           
-        </mat-grid-list>
+  </div>
 
-    </div>
+  <div class="posts-table" *ngIf="isTableView">
+
+    <table class="posts-table" mat-table [dataSource]="posts">
+      <ng-container matColumnDef="userid">
+        <th mat-header-cell *matHeaderCellDef> User Id </th>
+        <td mat-cell *matCellDef="let post"> {{post.userId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Post Id </th>
+        <td mat-cell *matCellDef="let post"> {{post.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let post"> {{post.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="body">
+        <th mat-header-cell *matHeaderCellDef> Text </th>
+        <td mat-cell *matCellDef="let post"> {{post.body}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRows; columns:columnsToDisplay" (click)="selectPost(myRows)" class="posts-table-row"></tr>
+
+    </table>
+
+  </div>
 
 </div>

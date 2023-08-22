@@ -1,21 +1,37 @@
 @import '../../styles.css';
 
-.posts-table-post {
+.posts-grid-post {
   background: linear-gradient(#583b63,#1d5432);
-  max-width: 400px;
+  min-width: 400px;
+  max-width:600px;
+  height:300px;
   cursor:pointer;
 }
 
 
-  .posts-table-post:hover {
+  .posts-grid-post:hover {
     transition-property: background;
     transition-duration: 0.5s;
     background: #33183d;
   }
 
 
-    .posts-table-post-content{
+    .posts-grid-post-content{
 
         color:var(--main-color-second)
 
     }
+
+.posts-table {
+  background: linear-gradient(#0f3331,#270f33)
+}
+
+.posts-table-row {
+  cursor: pointer;
+}
+
+  .posts-table-row:hover {
+    transition-property: background;
+    transition-duration: 0.5s;
+    background: #33183d;
+  }

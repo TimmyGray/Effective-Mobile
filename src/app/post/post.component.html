@@ -1,8 +1,12 @@
-<div *ngIf="post" class="post">
+<div class="post" *ngIf="post">
 
     <div class="post-title mat-headline-4"><p>{{post.title}}</p></div>
     <div class="post-user mat-subtitle-2"><p>user - {{post.userId}}</p></div>
     <div class="post-id mat-subtitle-2"><p>post - {{post.id}}</p></div>
     <div class="post-body mat-body"><p>{{post.body}}</p></div>
+
+  <div class="post-back">
+    <button mat-flat-button color="accent" (click)="goBack()">To posts...</button>
+  </div>
 
 </div>

@@ -66,7 +66,6 @@ export class AuthorizeComponent {
     this.authserv.loginUser(this.user);
     this.router.navigate(['/posts']);
     
-
   }
 
   register() {

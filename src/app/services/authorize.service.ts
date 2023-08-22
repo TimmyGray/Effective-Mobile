@@ -1,4 +1,5 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { User } from '../models/user';
 
@@ -8,27 +9,45 @@ import { User } from '../models/user';
 })
 export class AuthorizeService {
 
-  isAuthorized = new EventEmitter<boolean>();
+  private isAuthorized = new Subject<boolean>();
+  public isAuthorized$ = this.isAuthorized.asObservable();
+
+  constructor() {
+
+    this.setAuthorized(this.checkAuth());
+    
+  }
+
+  public checkAuth(): boolean {
+
+    let check = (localStorage.getItem('user-login') != null) ? true : false;
+    return check;
+  }
+
+  private setAuthorized(status:boolean) {
+
+    this.isAuthorized.next(status);
+
+  }
 
   public loginUser(user: User) {
 
-    this.isAuthorized.emit(true);
+    this.setAuthorized(true);
       localStorage.setItem('user-login', user.login);
 
   }
 
   public logOutUser() {
 
+    this.setAuthorized(false);
     localStorage.removeItem('user-login');
-    this.isAuthorized.emit(false);
-
-
+    
   }
 
   public registrationUser(registrationForm: any) {
 
+    this.setAuthorized(true);
     localStorage.setItem('user-login', registrationForm.login);
-    this.isAuthorized.emit(true);
 
   }
 
