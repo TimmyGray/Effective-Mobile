@@ -11,7 +11,7 @@ import { AuthorizeService } from '../services/authorize.service';
   templateUrl: './posts.component.html',
     styleUrls: ['./posts.component.css'],
 
-  providers: [PostsService, AuthorizeService]
+  providers: [PostsService]
 })
 export class PostsComponent implements OnInit {
 
@@ -26,31 +26,28 @@ export class PostsComponent implements OnInit {
 
       this.posts = [];
 
-      this.authserv.isAuthorized$.subscribe({
-
-          next: (is_authorized => {
-
-              this.isAuthorized = is_authorized;
-
-              if (this.isAuthorized) {
-
-                  this.router.navigate(['/authorize']);
-
-              }
-
-          })
-
-      });
 
 
   }
 
     ngOnInit() {
 
-        this.isAuthorized = this.authserv.checkUser();
-        if (!this.isAuthorized) {
+
+      this.authserv.isAuthorized.subscribe({
+
+        next: ((is_authorized: boolean) => {
+
+          this.isAuthorized = is_authorized;
+
+          if (this.isAuthorized) {
+
             this.router.navigate(['/authorize']);
-        }
+
+          }
+
+        })
+
+      });
 
         this.postsserv.getPosts().subscribe({
 

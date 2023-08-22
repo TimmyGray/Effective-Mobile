@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Post} from '../models/post';
+
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class PostComponent {
 
+  post: Post;
+
+  constructor() {
+
+    this.post = new Post(0, 0, '', '');
+  }
 }

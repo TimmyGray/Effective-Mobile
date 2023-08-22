@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from './models/user';
 
 import { AuthorizeService } from './services/authorize.service';
 
@@ -8,31 +7,31 @@ import { AuthorizeService } from './services/authorize.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers:[AuthorizeService]
 })
 export class AppComponent implements OnInit {
 
     title = 'Effective-Mobile';
-    isAuthorized: boolean = false;
+  isAuthorized: boolean = false;
 
     constructor(
         private readonly authservice: AuthorizeService,
         private readonly router: Router) {
 
+      
+  }
 
-    }
-    ngOnInit() {
+  ngOnInit() {
+    this.authservice.isAuthorized.subscribe({
+      next: ((is_authorized: boolean) => {
+        this.isAuthorized = is_authorized;
 
-        this.authservice.isAuthorized$.subscribe({
-            next: (is_authorized => {
-                this.isAuthorized = is_authorized;
-                console.log(is_authorized);
-            })
-        });
+      })
+    });   
+    
+   
+       
+  }
 
-        this.isAuthorized = this.authservice.checkUser();
-
-    }
 
     logout() {
 
@@ -41,15 +40,5 @@ export class AppComponent implements OnInit {
 
     }
 
-    check() {
-
-        if (!this.isAuthorized) {
-            this.authservice.loginUser(new User('', ''));
-        }
-        else {
-
-            this.authservice.logOutUser();
-        }
-
-    }
+   
 }

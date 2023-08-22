@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '../models/user';
 import { UserForm } from '../models/userForm';
@@ -11,7 +11,7 @@ import { confirmPasswordValidator } from '../directives/confirm_password_validat
   selector: 'app-authorize',
   templateUrl: './authorize.component.html',
     styleUrls: ['./authorize.component.css'],
-    providers:[FormBuilder,AuthorizeService]
+    providers:[FormBuilder]
 })
 export class AuthorizeComponent {
 
@@ -59,26 +59,28 @@ export class AuthorizeComponent {
 
     }
 
-    login() {
+  login() {
 
-        this.user.login = this.authorizeForm.get('login')?.value;
-        this.user.password = this.authorizeForm.get('password')?.value;
-        if (this.authserv.checkUser()) {
+    this.user.login = this.authorizeForm.get('login')?.value;
+    this.user.password = this.authorizeForm.get('password')?.value;
+    this.authserv.loginUser(this.user);
+    this.router.navigate(['/posts']);
+    
 
-            this.authserv.logOutUser();
-        }
-        else {
-            this.authserv.loginUser(this.user);
+  }
 
-        }
-       // this.router.navigate(['/posts']);
+  register() {
 
-    }
+    const registrationForm = {
+      login: this.authorizeForm.get('login')?.value,
+      password: this.authorizeForm.get('password')?.value,
+      confirm: this.authorizeForm.get('confirm')?.value
+    };
 
-    register() {
+    this.authserv.registrationUser(registrationForm);
+    this.router.navigate(['/posts']);
 
-
-    }
+  }
 
     initUser(): User {
 
@@ -88,7 +90,7 @@ export class AuthorizeComponent {
 
     initUserForm() {
 
-        return new UserForm("", "", "", true, true);
+      return new UserForm("qwerty", "qwerty1!", "qwerty1!", true, true);
 
     }
 
