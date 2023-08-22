@@ -17,6 +17,7 @@ export class PostsComponent implements OnInit {
 
   isAuthorized: boolean = false;
     posts: Post[];
+    selectedPost!: Post|null;
 
   constructor(
     private readonly postsserv: PostsService,
@@ -65,6 +66,12 @@ export class PostsComponent implements OnInit {
             })
             
         })
+
+    }
+
+    selectPost() {
+
+
 
     }
 

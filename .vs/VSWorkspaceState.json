@@ -3,7 +3,7 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\authorize",
+    "\\src\\app\\directives",
     "\\src\\app\\materials",
     "\\src\\app\\models",
     "\\src\\app\\post",
@@ -11,6 +11,6 @@
     "\\src\\app\\routes",
     "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\posts\\posts.component.css",
+  "SelectedNode": "\\src\\app\\authorize\\authorize.component.html",
   "PreviewInSolutionExplorer": false
 }

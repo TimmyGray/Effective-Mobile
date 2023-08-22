@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import {  } from '@angular/forms';
 
 import { Post} from '../models/post';
 
@@ -9,10 +10,6 @@ import { Post} from '../models/post';
 })
 export class PostComponent {
 
-  post: Post;
+  @Input() post!: Post;
 
-  constructor() {
-
-    this.post = new Post(0, 0, '', '');
-  }
 }
