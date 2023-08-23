@@ -59,6 +59,23 @@ export class AuthorizeComponent {
 
     }
 
+    public get loginField(){
+
+        return this.authorizeForm.get('login');
+
+    }
+
+    public get passwordField() {
+
+        return this.authorizeForm.get('password');
+    }
+
+    public get confirmField() {
+
+        return this.authorizeForm.get('confirm');
+
+    }
+
   login() {
 
     this.user.login = this.authorizeForm.get('login')?.value;
