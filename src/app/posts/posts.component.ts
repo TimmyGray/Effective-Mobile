@@ -29,6 +29,7 @@ export class PostsComponent implements OnInit, OnDestroy {
       private readonly breakpointobserver: BreakpointObserver) {
 
       this.checkForAuth();
+
       breakpointobserver.observe([
           Breakpoints.Small,
           Breakpoints.Medium,
@@ -55,6 +56,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
               })
           });
+
       this.posts = [];
 
   }

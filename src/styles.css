@@ -26,19 +26,47 @@
 
 }
 
+.ml-4r{
+
+    margin-left:4rem;
+
+}
+
 .mr-2r{
 
     margin-right:2rem;
 
 }
 
-body {
+.mr-4r{
 
+    margin-right:2rem;
+
+}
+
+.mb-2r{
+
+    margin-bottom:2rem;
+
+}
+
+.mb-6r{
+
+    margin-bottom:6rem;
+
+}
+
+.mt-2r{
+
+    margin-top:2rem;
+
+}
+
+body {
     height: 100%;
     background: linear-gradient(#150d26, var(--main-color-fifth) );
     background-attachment: fixed;
     color: var(--main-color-first);
-
 }
 
 html{

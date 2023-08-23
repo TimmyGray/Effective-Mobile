@@ -1,12 +1,26 @@
 <div class="post" *ngIf="post">
 
-    <div class="post-title mat-headline-4"><p>{{post.title}}</p></div>
-    <div class="post-user mat-subtitle-2"><p>user - {{post.userId}}</p></div>
-    <div class="post-id mat-subtitle-2"><p>post - {{post.id}}</p></div>
-    <div class="post-body mat-body"><p>{{post.body}}</p></div>
+    <div class="post-title mat-subtitle-1 mb-6r">
+        <p>{{post.title}}</p>
 
-  <div class="post-back">
-    <button mat-flat-button color="accent" (click)="goBack()">To posts...</button>
+        <div class="post-title-info  mat-subtitle-2">
+            <div class="post-title-info-user mr-1r">
+                <p>User Id - {{post.userId}}</p>
+            </div>
+            <div class="post-title-info-id">
+                <p>Post Id - {{post.id}}</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="post-body mat-body">
+        <p>{{post.body}}</p>
+    </div>
+
+  <div class="post-back mt-2r">
+    <button mat-flat-button color="accent" (click)="goBack()">To Posts...</button>
   </div>
 
 </div>

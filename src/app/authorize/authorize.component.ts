@@ -89,7 +89,7 @@ export class AuthorizeComponent {
 
     initUserForm() {
 
-      return new UserForm("qwerty", "qwerty1!", "qwerty1!", true, true);
+      return new UserForm("", "", "", true, true);
 
     }
 
