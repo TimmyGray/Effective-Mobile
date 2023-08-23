@@ -9,7 +9,7 @@
   </div>
   <div class="posts-grid" *ngIf="isGridView">
 
-    <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-list [cols]="numberOfcols" rowHeight="2:1">
       <mat-grid-tile *ngFor="let post of posts; let i=index">
 
         <mat-card class="posts-grid-post" (click)="selectPost(post)">

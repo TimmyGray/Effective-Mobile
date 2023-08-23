@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Post } from '../models/post';
-import { Router,} from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
+import { Post } from '../models/post';
 import { PostsService } from '../services/posts.service';
 import { AuthorizeService } from '../services/authorize.service';
 
@@ -10,8 +12,9 @@ import { AuthorizeService } from '../services/authorize.service';
   templateUrl: './posts.component.html',
     styleUrls: ['./posts.component.css'],
 })
-export class PostsComponent implements OnInit {
-
+export class PostsComponent implements OnInit, OnDestroy {
+    destroyed: Subject<void> = new Subject();
+    numberOfcols!: number;
   isTableView: boolean = false;
   isGridView: boolean = true;
 
@@ -22,16 +25,43 @@ export class PostsComponent implements OnInit {
   constructor(
     private readonly postsserv: PostsService,
       private readonly authserv: AuthorizeService,
-      private readonly router: Router) {
+      private readonly router: Router,
+      private readonly breakpointobserver: BreakpointObserver) {
 
-    this.checkForAuth();
+      this.checkForAuth();
+      breakpointobserver.observe([
+          Breakpoints.Small,
+          Breakpoints.Medium,
+          Breakpoints.Large
+      ]).pipe(takeUntil(this.destroyed))
+          .subscribe({
+              next: (state => {
 
+                  for (let query of Object.keys(state.breakpoints)) {
+
+                      if (state.breakpoints[query]) {
+                          if (query === Breakpoints.Small) {
+                              this.numberOfcols = 1;
+                          }
+                          if (query === Breakpoints.Medium) {
+                              this.numberOfcols = 2;
+                          }
+                          if (query === Breakpoints.Large) {
+                              this.numberOfcols = 3;
+                          }
+                      }
+
+                  }
+
+              })
+          });
       this.posts = [];
 
   }
 
     ngOnInit() {
-     
+
+        
         this.postsserv.getPosts().subscribe({
 
             next: ((all_posts: Post[]) => {
@@ -51,7 +81,14 @@ export class PostsComponent implements OnInit {
 
       this.getView();
 
-  }
+    }
+
+    ngOnDestroy() {
+
+        this.destroyed.next();
+        this.destroyed.complete();
+
+    }
 
 
   checkForAuth() {

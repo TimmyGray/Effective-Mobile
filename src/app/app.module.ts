@@ -5,6 +5,7 @@ import { MaterialModule } from './materials/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LayoutModule } from "@angular/cdk/layout";
 
 
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ import { AuthorizeComponent } from './authorize/authorize.component';
     BrowserAnimationsModule,
       HttpClientModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
