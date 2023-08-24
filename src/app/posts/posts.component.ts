@@ -10,11 +10,13 @@ import { AuthorizeService } from '../services/authorize.service';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-    styleUrls: ['./posts.component.css'],
+  styleUrls: ['./posts.component.css'],
+  
 })
 export class PostsComponent implements OnInit, OnDestroy {
-    destroyed: Subject<void> = new Subject();
-    numberOfcols!: number;
+
+  destroyed: Subject<void> = new Subject();
+  numberOfcols!: number;
   isTableView: boolean = false;
   isGridView: boolean = true;
 
@@ -24,76 +26,79 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly postsserv: PostsService,
-      private readonly authserv: AuthorizeService,
-      private readonly router: Router,
-      private readonly breakpointobserver: BreakpointObserver) {
+    private readonly authserv: AuthorizeService,
+    private readonly router: Router,
+    private readonly breakpointobserver: BreakpointObserver) {
 
-      this.checkForAuth();
+    this.checkForAuth();
 
-      breakpointobserver.observe([
-          Breakpoints.Small,
-          Breakpoints.Medium,
-          Breakpoints.Large
-      ]).pipe(takeUntil(this.destroyed))
-          .subscribe({
-              next: (state => {
+    this.breakpointobserver.observe([
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large
+    ]).pipe(takeUntil(this.destroyed))
+      .subscribe({
+        next: (state => {
 
-                  for (let query of Object.keys(state.breakpoints)) {
+          for (let query of Object.keys(state.breakpoints)) {
 
-                      if (state.breakpoints[query]) {
-                          if (query === Breakpoints.Small) {
-                              this.numberOfcols = 1;
-                          }
-                          if (query === Breakpoints.Medium) {
-                              this.numberOfcols = 2;
-                          }
-                          if (query === Breakpoints.Large) {
-                              this.numberOfcols = 3;
-                          }
-                      }
+            if (state.breakpoints[query]) {
+              if (query === Breakpoints.Small) {
+                this.numberOfcols = 1;
+              }
+              if (query === Breakpoints.Medium) {
+                this.numberOfcols = 2;
+              }
+              if (query === Breakpoints.Large) {
+                this.numberOfcols = 3;
+              }
+            }
 
-                  }
+          }
 
-              })
-          });
+        })
+      });
+   
 
-      this.posts = [];
+    this.posts = [];
 
   }
 
-    ngOnInit() {
+  ngOnInit() {
 
-        
-        this.postsserv.getPosts().subscribe({
+    this.numberOfcols = this.setColumsNumber();
 
-            next: ((all_posts: Post[]) => {
+    
+    this.postsserv.getPosts().subscribe({
 
-                this.posts = all_posts;
+      next: ((all_posts: Post[]) => {
 
-            }),
+        this.posts = all_posts;
 
-            error: (error => {
+      }),
 
-                console.error(error.message);
-                alert(error.message);
+      error: (error => {
 
-            })
-            
-        })
+        console.error(error.message);
+        alert(error.message);
 
-      this.getView();
+      })
 
-    }
+    })
 
-    ngOnDestroy() {
+    this.getView();
 
-        this.destroyed.next();
-        this.destroyed.complete();
+  }
 
-    }
+  ngOnDestroy() {
+
+    this.destroyed.next();
+    this.destroyed.complete();
+
+  }
 
 
-  checkForAuth() {
+  private checkForAuth() {
 
     if (!this.authserv.checkAuth()) {
 
@@ -103,25 +108,25 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   }
 
-  selectPost(post: Post) {
+  public selectPost(post: Post) {
 
-      //this variant for get post without http request to server
-      //this.router.navigate(['/posts', post.id], {
-      //  queryParams: {
+    //this variant for get post without http request to server
+    //this.router.navigate(['/posts', post.id], {
+    //  queryParams: {
 
-      //    userId: post.userId,
-      //    title: post.title,
-      //    body: post.body
+    //    userId: post.userId,
+    //    title: post.title,
+    //    body: post.body
 
-      //  }
+    //  }
 
-      //});
+    //});
 
-      this.router.navigate(['/posts', post.id]);
+    this.router.navigate(['/posts', post.id]);
 
   }
 
-  changeView() {
+  public changeView() {
 
     if (this.isGridView) {
       this.tableView();
@@ -131,7 +136,7 @@ export class PostsComponent implements OnInit, OnDestroy {
       this.gridView();
       localStorage.setItem('postsView', '1');
     }
-  
+
   }
 
   private gridView() {
@@ -166,6 +171,18 @@ export class PostsComponent implements OnInit, OnDestroy {
       }
 
     }
+
+  }
+
+  private setColumsNumber() {
+
+    if (window.innerWidth >= 1280) {
+      return 3;
+    }
+    if (window.innerWidth >= 960) {
+      return 2;
+    }
+    return 1;
 
   }
 

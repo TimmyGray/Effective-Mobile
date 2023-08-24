@@ -25,10 +25,10 @@ import { AuthorizeComponent } from './authorize/authorize.component';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-      HttpClientModule,
-      FormsModule,
-      ReactiveFormsModule,
-      LayoutModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

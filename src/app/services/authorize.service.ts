@@ -15,39 +15,71 @@ export class AuthorizeService {
   constructor() {
 
     this.setAuthorized(this.checkAuth());
-    
+
+  }
+
+  public getUser():User {
+
+    let log = localStorage.getItem('user-login')||"";
+    let pas = localStorage.getItem('user-password')||"";
+
+    return new User(log, pas);
+
+  }
+
+  public getCurrentUser():string|null {
+
+    return localStorage.getItem('login');
+
   }
 
   public checkAuth(): boolean {
 
-    let check = (localStorage.getItem('user-login') != null) ? true : false;
-    return check;
+    return (this.getCurrentUser() != null) ? true : false;
+
   }
 
-  private setAuthorized(status:boolean) {
+  private setAuthorized(status: boolean) {
 
     this.isAuthorized.next(status);
 
   }
 
-  public loginUser(user: User) {
+  public loginUser(user: User):boolean {
 
-    this.setAuthorized(true);
-      localStorage.setItem('user-login', user.login);
+    let regUser = this.getUser();
 
+    if (user.login == regUser.login && user.password == regUser.password) {
+
+      localStorage.setItem('login', user.login);
+      this.setAuthorized(true);
+
+      return true;
+
+    }
+
+    return false;
   }
 
   public logOutUser() {
 
+    localStorage.removeItem('login');
     this.setAuthorized(false);
-    localStorage.removeItem('user-login');
-    
+
   }
 
-  public registrationUser(registrationForm: any) {
+  public registrationUser(registrationForm: any):boolean {
 
-    this.setAuthorized(true);
+    let checkExist = localStorage.getItem('user-login') || "";
+
+    if (checkExist === registrationForm.login) {
+      return false;
+    }
+
     localStorage.setItem('user-login', registrationForm.login);
+    localStorage.setItem('user-password', registrationForm.password);
+
+    return this.loginUser(new User(registrationForm.login, registrationForm.password));
 
   }
 

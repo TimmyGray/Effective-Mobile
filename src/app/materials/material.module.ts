@@ -20,7 +20,7 @@ const materials = [
   MatToolbarModule,
   MatMenuModule,
   MatListModule,
-    MatIconModule,
+  MatIconModule,
   MatCardModule,
   LayoutModule];
 

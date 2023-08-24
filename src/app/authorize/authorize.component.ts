@@ -10,82 +10,91 @@ import { confirmPasswordValidator } from '../directives/confirm_password_validat
 @Component({
   selector: 'app-authorize',
   templateUrl: './authorize.component.html',
-    styleUrls: ['./authorize.component.css'],
-    providers:[FormBuilder]
+  styleUrls: ['./authorize.component.css'],
+  providers: [FormBuilder]
 })
 export class AuthorizeComponent {
 
-    authorizeForm: FormGroup;
+  authorizeForm: FormGroup;
 
-    user: User;
-    userInfo: UserForm;
-    isRegistration: boolean;
+  user: User;
+  userInfo: UserForm;
+  isRegistration: boolean;
 
-    constructor(
-        private readonly router: Router,
-        private readonly authserv: AuthorizeService,
-        private readonly fb: FormBuilder) {
+  constructor(
+    private readonly router: Router,
+    private readonly authserv: AuthorizeService,
+    private readonly fb: FormBuilder) {
 
-        this.user = this.initUser();
-        this.userInfo = this.initUserForm();
-        this.isRegistration = false;
+    this.user = this.initUser();
+    this.userInfo = this.initUserForm();
+    this.isRegistration = false;
 
-        this.authorizeForm = this.fb.group({
+    this.authorizeForm = this.fb.group({
 
-            login: [this.userInfo.login,
-                [Validators.required, Validators.maxLength(20)]
-            ],
-            password: [this.userInfo.password,
-                [
-                    Validators.required,
-                    Validators.maxLength(20),
-                    Validators.minLength(6),
-                    Validators.pattern(new RegExp(/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*?_+-]).*$/))
-                ]
-            ],
-            confirm: [this.userInfo.confirm]
+      login: [this.userInfo.login,
+      [Validators.required, Validators.maxLength(20)]
+      ],
 
-        }, { validators: confirmPasswordValidator });
+      password: [this.userInfo.password,
+      [
+        Validators.required,
+        Validators.maxLength(20),
+        Validators.minLength(6),
+        Validators.pattern(new RegExp(/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*?_+-]).*$/))
+        ]],
 
-    }
+      confirm: [this.userInfo.confirm]
 
-    inputLoginPassword() {
+    }, { validators: confirmPasswordValidator });
 
-        if (!this.isRegistration) {
-            this.authorizeForm.patchValue({
-                confirm: this.authorizeForm.get('password')?.value
-            });
-        }
+  }
 
-    }
+  public inputLoginPassword() {
 
-    public get loginField(){
+    if (!this.isRegistration) {
 
-        return this.authorizeForm.get('login');
+      this.authorizeForm.patchValue({
+        confirm: this.authorizeForm.get('password')?.value
+      });
 
     }
 
-    public get passwordField() {
+  }
 
-        return this.authorizeForm.get('password');
-    }
+  public get loginField() {
 
-    public get confirmField() {
+    return this.authorizeForm.get('login');
 
-        return this.authorizeForm.get('confirm');
+  }
 
-    }
+  public get passwordField() {
 
-  login() {
+    return this.authorizeForm.get('password');
+
+  }
+
+  public get confirmField() {
+
+    return this.authorizeForm.get('confirm');
+
+  }
+
+  public login() {
 
     this.user.login = this.authorizeForm.get('login')?.value;
     this.user.password = this.authorizeForm.get('password')?.value;
-    this.authserv.loginUser(this.user);
-    this.router.navigate(['/posts']);
-    
+
+    let login_result = this.authserv.loginUser(this.user);
+
+    (login_result)
+      ? this.router.navigate(['/posts'])
+      : alert("User not exist or invalid password"); 
+
+
   }
 
-  register() {
+  public register() {
 
     const registrationForm = {
       login: this.authorizeForm.get('login')?.value,
@@ -93,21 +102,22 @@ export class AuthorizeComponent {
       confirm: this.authorizeForm.get('confirm')?.value
     };
 
-    this.authserv.registrationUser(registrationForm);
-    this.router.navigate(['/posts']);
+    (this.authserv.registrationUser(registrationForm))
+      ? this.router.navigate(['/posts'])
+      : alert("The user with this login already exists");
+   
+  }
+
+  private initUser(): User {
+
+    return new User("", "");
 
   }
 
-    initUser(): User {
+  private initUserForm() {
 
-        return new User("", "");
+    return new UserForm("", "", "", true, true);
 
-    }
-
-    initUserForm() {
-
-      return new UserForm("", "", "", true, true);
-
-    }
+  }
 
 }

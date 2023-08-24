@@ -1,51 +1,39 @@
-.app{
-
-
-}
 
 .app-toolbar {
-
   position: sticky;
   top: 0;
   z-index: 2;
   position: -webkit-sticky;
-
-}
-
-.app-toolbar-accmenu {
 }
 
 .app-toolbar-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
+.app-toolbar-accmenu-user{
 
-@media(max-width:599px){
+    text-align:center;
 
+}
+
+@media(max-width:599px) {
   .hide-tabs {
     display: none;
   }
-    
+
 
   .show-menu {
     display: inline;
-    
   }
 }
 
-@media(min-width:600px){
+@media(min-width:600px) {
 
-   .hide-menu{
-
-       display:none;
-
-   }
-
+  .hide-menu {
+    display: none;
+  }
 }
 
 .active {
   background: #3f3a8c;
 }
-
-
-

@@ -1,7 +1,6 @@
-import { Component,OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-
 
 import { Post } from '../models/post';
 import { Subscription, map, exhaustMap } from 'rxjs';
@@ -16,7 +15,7 @@ import { AuthorizeService } from '../services/authorize.service';
 export class PostComponent implements OnInit, OnDestroy {
 
   post!: Post;
- // paramsSubscription: Subscription;
+  // paramsSubscription: Subscription;
 
   constructor(
     private readonly location: Location,
@@ -60,12 +59,12 @@ export class PostComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-   
-   // this.paramsSubscription.unsubscribe();
+
+    // this.paramsSubscription.unsubscribe();
 
   }
 
-  checkForAuth() {
+  private checkForAuth() {
 
     if (!this.authserv.checkAuth()) {
 
@@ -75,7 +74,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   }
 
-  goBack() {
+  public goBack() {
 
     this.location.back();
 

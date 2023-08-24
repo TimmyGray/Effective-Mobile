@@ -9,20 +9,20 @@ import { Post } from '../models/post';
 })
 export class PostsService {
 
-    private url: string = "https://jsonplaceholder.typicode.com/posts";
+  private url: string = "https://jsonplaceholder.typicode.com/posts";
 
-    constructor(private readonly httpclient: HttpClient) { }
+  constructor(private readonly httpclient: HttpClient) { }
 
-    getPosts(): Observable<Post[]> {
+  public getPosts(): Observable<Post[]> {
 
-        return this.httpclient.get<Post[]>(this.url);
+    return this.httpclient.get<Post[]>(this.url);
 
-    }
+  }
 
-    getPost(id: number): Observable<Post> {
+  public getPost(id: number): Observable<Post> {
 
-        return this.httpclient.get<Post>(this.url + `/${id}`);
+    return this.httpclient.get<Post>(this.url + `/${id}`);
 
-    }
+  }
 
 }

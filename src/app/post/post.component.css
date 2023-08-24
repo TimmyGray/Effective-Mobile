@@ -1,29 +1,26 @@
 @import '../../styles.css';
 
-
 .post {
-    margin-left: 8rem;
-    margin-right: 8rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
 }
+
 .post-title {
-    
-    text-align: center;
-    font-size:32px;
+  text-align: center;
+  font-size: 32px;
 }
 
 
 .post-title-info-user {
-    display: inline-flex;
-    color: var(--main-color-third);
+  display: inline-flex;
+  color: var(--main-color-third);
 }
 
 .post-title-info-id {
-    display: inline-flex;
-    color: var(--main-color-third);
+  display: inline-flex;
+  color: var(--main-color-third);
 }
 
-.post-body{
-
-    color:var(--main-color-second);
-
+.post-body {
+  color: var(--main-color-second);
 }

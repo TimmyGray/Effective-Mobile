@@ -5,8 +5,8 @@ import { AuthorizeService } from './services/authorize.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+    selector: 'app-root',
+    templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -14,27 +14,31 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuthorized: boolean = false;
   authirizationSub!: Subscription;
 
-    constructor(
-        private readonly authservice: AuthorizeService,
-      private readonly router: Router) {
+  currentUser!: string|null;
+
+  constructor(
+
+    private readonly authservice: AuthorizeService,
+    private readonly router: Router) {
 
   }
 
 
   ngOnInit() {
 
-   
     this.authirizationSub = this.authservice.isAuthorized$.subscribe({
 
       next: ((is_authorized: boolean) => {
+        this.currentUser = this.authservice.getCurrentUser();
         this.isAuthorized = is_authorized;
-
       })
-    });   
+
+    });
 
     this.isAuthorized = this.authservice.checkAuth();
-       
+    this.currentUser = this.authservice.getCurrentUser();
   }
+  
 
   ngOnDestroy() {
 
@@ -42,12 +46,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   }
 
-    logout() {
+  public logout() {
 
-        this.authservice.logOutUser();
-        this.router.navigate(['/authorize']);
+    this.authservice.logOutUser();
+    this.router.navigate(['/authorize']);
 
-    }
+  }
 
-   
 }

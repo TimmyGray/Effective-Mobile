@@ -4,7 +4,7 @@
         <p>Authorize</p>
     </div>
 
-    <form  class="auth-form" [formGroup]="authorizeForm">
+    <form class="auth-form" [formGroup]="authorizeForm">
 
         <div class="auth-form-login mb-2r">
 
@@ -12,8 +12,14 @@
                 <mat-label>Enter email or login:</mat-label>
                 <input matInput type="text" placeholder="Email or Login..." formControlName="login" />
                 <mat-icon matSuffix>face</mat-icon>
-                <mat-error *ngIf="loginField?.hasError('required')&&(loginField?.touched||loginField?.dirty)">Login required</mat-error>
-                <mat-error *ngIf="loginField?.hasError('maxlength')">Use less than 20 characters</mat-error>
+                <mat-error
+                    *ngIf="loginField?.hasError('required')&&(loginField?.touched||loginField?.dirty)">
+                    Login required
+                </mat-error>
+                <mat-error
+                    *ngIf="loginField?.hasError('maxlength')">
+                    Use less than 20 characters
+                </mat-error>
             </mat-form-field>
 
         </div>
@@ -22,13 +28,34 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Enter password:</mat-label>
-                <input matInput [type]="(userInfo.hide_password)?'password':'text'" placeholder="password..." formControlName="password" (input)="inputLoginPassword()" />
-                <button mat-icon-button matSuffix (click)="userInfo.hide_password=!userInfo.hide_password"><mat-icon>{{(userInfo.hide_password)?'visibility_off':'visibility_on'}}</mat-icon></button>
+                <input
+                    matInput
+                    [type]="(userInfo.hide_password)?'password':'text'"
+                    placeholder="password..."
+                    formControlName="password"
+                    (input)="inputLoginPassword()" />
+                <button
+                    mat-icon-button
+                    matSuffix (click)="userInfo.hide_password=!userInfo.hide_password">
+                    <mat-icon>{{(userInfo.hide_password)?'visibility_off':'visibility_on'}}</mat-icon>
+                </button>
                 <mat-hint>Use at least 1 digit and special symbol</mat-hint>
-                <mat-error *ngIf="passwordField?.hasError('required')&&(passwordField?.touched||passwordField?.dirty)">Password required</mat-error>
-                <mat-error *ngIf="passwordField?.hasError('maxlength')">Use less than 20 characters</mat-error>
-                <mat-error *ngIf="passwordField?.hasError('minlength')">Password must include at least 6 characters</mat-error>
-                <mat-error *ngIf="passwordField?.hasError('pattern')">Password must include at least 1 digit and special symbol</mat-error>
+                <mat-error
+                    *ngIf="passwordField?.hasError('required')&&(passwordField?.touched||passwordField?.dirty)">
+                    Password required
+                </mat-error>
+                <mat-error
+                    *ngIf="passwordField?.hasError('maxlength')">
+                    Use less than 20 characters
+                </mat-error>
+                <mat-error
+                    *ngIf="passwordField?.hasError('minlength')">
+                    Password must include at least 6 characters
+                </mat-error>
+                <mat-error
+                    *ngIf="passwordField?.hasError('pattern')">
+                    Password must include at least 1 digit and special symbol
+                </mat-error>
             </mat-form-field>
 
         </div>
@@ -37,17 +64,44 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Confirm your password:</mat-label>
-                <input matInput [type]="(userInfo.hide_confirm)?'password':'text'" placeholder="confirm password..." formControlName="confirm" [required]="isRegistration" />
-                <button mat-icon-button matSuffix (click)="userInfo.hide_confirm=!userInfo.hide_confirm"><mat-icon>{{(userInfo.hide_confirm)?'visibility_off':'visibility_on'}}</mat-icon></button>
-                <mat-error *ngIf="authorizeForm.hasError('notSame')">Password and confirm password must be equal</mat-error>
+                <input
+                    matInput
+                    [type]="(userInfo.hide_confirm)?'password':'text'"
+                    placeholder="confirm password..."
+                    formControlName="confirm"
+                    [required]="isRegistration" />
+                <button
+                    mat-icon-button
+                    matSuffix
+                    (click)="userInfo.hide_confirm=!userInfo.hide_confirm">
+                    <mat-icon>{{(userInfo.hide_confirm)?'visibility_off':'visibility_on'}}</mat-icon>
+                </button>
+                <mat-error
+                    *ngIf="authorizeForm.hasError('notSame')">
+                    Password and confirm password must be equal
+                </mat-error>
             </mat-form-field>
 
         </div>
 
         <div class="auth-form-buttons">
 
-            <button mat-raised-button class="mr-1r" color="warn" (click)="isRegistration=!isRegistration">{{(!isRegistration)? 'Not registered?':'Allready registered?'}}</button>
-            <button mat-raised-button color="primary" type="button" [disabled]="!authorizeForm.valid" (click)="login()">{{(!isRegistration)?'Login':'Register'}}</button>
+            <button
+                mat-raised-button
+                class="mr-1r"
+                color="warn"
+                (click)="isRegistration=!isRegistration">
+                {{(!isRegistration)? 'Not registered?':'Allready registered?'}}
+            </button>
+
+            <button
+                mat-raised-button
+                color="primary"
+                type="button"
+                [disabled]="!authorizeForm.valid"
+                (click)="(!isRegistration)?login():register()">
+                {{(!isRegistration)?'Login':'Register'}}
+            </button>
 
         </div>
 

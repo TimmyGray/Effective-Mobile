@@ -1,28 +1,19 @@
 @import '../../styles.css';
 
-.posts{
-
-
-
+.posts-header {
+  text-align: center;
 }
 
-.posts-header{
-
-    text-align:center;
-}
-
-.posts-header-text{
-
-    font-size:32px;
-
+.posts-header-text {
+  font-size: 32px;
 }
 
 .posts-grid-post {
   background: linear-gradient(#583b63,#1d5432);
   min-width: 200px;
-  max-width:400px;
-  height:200px;
-  cursor:pointer;
+  max-width: 400px;
+  height: 200px;
+  cursor: pointer;
 }
 
 
@@ -33,26 +24,22 @@
   }
 
 
-    .posts-grid-post-content{
-
-        color:var(--main-color-second)
-
-    }
+.posts-grid-post-content {
+  color: var(--main-color-second)
+}
 
 .posts-table {
-    text-align:center;
+  text-align: center;
   background: linear-gradient(#0f3331,#270f33)
 }
 
-.posts-table-header{
-
-    font-size:24px;
-    color:var(--main-color-first);
-
+.posts-table-header {
+  font-size: 24px;
+  color: var(--main-color-first);
 }
 
 .posts-table-row {
-    color:var(--main-color-second);
+  color: var(--main-color-second);
   cursor: pointer;
 }
 
@@ -61,4 +48,3 @@
     transition-duration: 0.5s;
     background: #33183d;
   }
-
